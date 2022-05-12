@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import CurrencyRow from './CurrencyRow'
+import CurrencyRow from './CurrencyRow';
+import Header from './Header';
 
 const BASE_URL = "https://api.apilayer.com/exchangerates_data/latest?symbols=USD%2C%20GBP%2C%20EUR%2C%20AZN&base=UAH"
 
@@ -15,11 +16,12 @@ var requestOptions = {
   
 
 function App() {
-  const [currencyOptions, setCurrencyOptions] = useState([])
-  const [fromCurrency, setFromCurrency] = useState()
-  const [toCurrency, setToCurrency] = useState()
-  const [amount, setAmount] = useState(1)
-  const [toAmount, setToAmount] = useState(0)
+  const [currencyOptions, setCurrencyOptions] = useState([]);
+  const [rates, setRates] = useState([]);
+  const [fromCurrency, setFromCurrency] = useState();
+  const [toCurrency, setToCurrency] = useState();
+  const [amount, setAmount] = useState(1);
+  const [toAmount, setToAmount] = useState(0);
 
   useEffect(() => {
     fetch(BASE_URL, requestOptions)
@@ -29,7 +31,9 @@ function App() {
         setCurrencyOptions([res.base, ...Object.keys(res.rates)])
         setFromCurrency(res.base)
         setToCurrency(firstCurrency)
+        setRates(res.rates)
       })
+      .catch(error => console.log('error', error));
   }, [])
 
   useEffect(() => {
@@ -38,6 +42,7 @@ function App() {
       fetch(`https://api.apilayer.com/exchangerates_data/convert?to=${toCurrency}&from=${fromCurrency}&amount=${amount}`, requestOptions)
         .then(res => res.json())
         .then(res => setToAmount(res.result))
+        .catch(error => console.log('error', error));
     }
   }, [fromCurrency, toCurrency, toAmount, amount])
 
@@ -51,6 +56,7 @@ function App() {
 
   return (
     <>
+      <Header rates={rates}/>
       <h1>Convert</h1>
       <CurrencyRow
         currencyOptions={currencyOptions}
