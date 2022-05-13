@@ -1,0 +1,15 @@
+.header {
+    height: 100px;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    font-size: larger;
+    justify-content: center;
+    align-items: center;
+}
+
+.message {
+    font-size: x-large;
+    font-weight: bold;
+    margin: 0 10px;
+}
