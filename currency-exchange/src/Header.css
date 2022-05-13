@@ -13,3 +13,11 @@
     font-weight: bold;
     margin: 0 10px;
 }
+
+.ratesElement {
+    margin: 0 10px;
+}
+
+.currencyName {
+    margin: 0 5px 0 0;
+}

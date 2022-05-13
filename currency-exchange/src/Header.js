@@ -11,8 +11,8 @@ export default function Header(props) {
    let displayRates = currency.map((Currency, i) => {
      return (
        <>
-       <div key={Currency} classname='ratesElement' style={{margin: "0 10px"}}>
-         <span classname='currencyName' style={{margin: "0 5px 0 0"}}>{Currency}:</span>
+       <div key={Currency} className='ratesElement'>
+         <span className='currencyName'>{Currency}:</span>
          <span>{exchangeRates[i]},</span>
        </div>
        </>
