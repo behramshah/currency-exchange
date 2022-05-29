@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 
-export default function Header(props) {
+export default function Currencies(props) {
 
   const {rates} = props;
 
